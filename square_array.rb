@@ -1,6 +1,6 @@
 def square_array(numbers)
   numbers.each { |element|
-puts element**2
+puts numbers[element**2]
 return numbers
 }
 
