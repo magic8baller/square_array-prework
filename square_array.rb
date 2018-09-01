@@ -1,6 +1,6 @@
 def square_array(numbers)
   numbers.each { |element|
-  puts Integer.sqrt(numbers) }
+  element*element }
 
   # your code here
 end
