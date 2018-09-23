@@ -4,29 +4,57 @@ def square_array(numbers)
   new_numbers
 end
 
-square_array([3, 4, 6, 7])  # => [9, 16, 36, 49]
+p square_array([4, 8, 16, 32])
+# => [16, 64, 256, 1024]
 
 
-# with #each - need to push into new array, because is going over each element;
-# map = returns a collection;
-
-=begin
-#with pushing squares into new array w/in block:
+  # --- Array#map
 
 def square_map(array)
-  result = []
-  array.map {|elem| result << elem**2}
-end
-square_map([3, 4, 6, 7])
-    # =>[[9, 16, 36, 49], [9, 16, 36, 49], [9, 16, 36, 49], [9, 16, 36, 49]]
-=end
-
-#right way:
-
-def square_map(numbers)
-  final = []
-  final = numbers.map { |num| num**2 }
+  array.map{ |elem| elem**2 }
 end
 
+p square_map([4, 6, 8, 12])
+# => [16, 36, 64, 144]
 
-square_map([3, 4, 6, 7])   # => [9, 16, 36, 49]
+
+
+# other methods! :
+
+  # ---  Array#inject([])
+
+def square_inject(array)
+  array.inject([]) { |arr, num| arr << num * num }
+end
+
+p square_inject([6, 10, 42, 7])
+# => [36, 100, 1764, 49]
+
+
+
+  # -- #each_with_object
+
+def square_each_w_obj(array)
+  array.each_with_object([]) { |elem, new_arr| new_arr << elem ** 2 }
+end
+
+p square_each_w_obj([5, 6, 7, 8])
+# => [25, 36, 49, 64]
+
+
+
+  # -- Array#each_index -> init with Array#new
+
+def square_each_idx(array)
+  final = Array.new(array.length)
+  array.each_index { |i| final[i] = array[i]**2 }
+  final
+end
+
+p square_each_idx([2, 3, 4, 5])
+# => [4, 9, 16, 25]
+
+
+    # *above: arg(array.length) creates new array w/ length == original arr. length
+    #-Array.new(array.size) ==> [nil, nil, nil, nil]
+    #-assign squares to e/ of those empty(nil) array vals at respective idx posxn
